@@ -22,7 +22,7 @@ class MIDOG2021Evaluation():
         self.val_gt, self.test_gt = {}, {}
         self.load_gt()
 
-        self.cases = pd.read_csv('/app/MIDOGpp-main/datasets_xvalidation.csv', delimiter=";")
+        self.cases = pd.read_csv('/workspace/faster-midog-plus/MIDOGpp-main/datasets_xvalidation.csv', delimiter=";")
         self.case_to_tumor = {'%03d.tiff' % d.loc['Slide'] : d.loc['Tumor'] for _, d in self.cases.iterrows()}
 
     def load_gt(self):

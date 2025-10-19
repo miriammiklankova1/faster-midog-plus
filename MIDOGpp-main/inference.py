@@ -173,7 +173,7 @@ class Mitosisdetection(DetectionAlgorithm):
         self.output_test_file = Path(os.path.join(path, "mitotic-figures-test.json"))
 
         self.database = Database()
-        self.database.open(Path("/mnt/datasets/MIDOGpp/images/MIDOG++.sqlite"))
+        self.database.open(Path("/mnt/datasets/MIDOGpp/images/MIDOGpp.sqlite"))
         self.uids = dict(self.database.execute('SELECT filename,uid from Slides').fetchall())
         self.gts = {}
 

@@ -14,7 +14,7 @@ wandb:
 
 files:
   image_path: /mnt/datasets/MIDOGpp/images
-  annotation_file: /mnt/datasets/MIDOGpp/images/MIDOG++.sqlite
+  annotation_file: /mnt/datasets/MIDOGpp/images/MIDOGpp.sqlite
 
 data:
   patch_size: 512
