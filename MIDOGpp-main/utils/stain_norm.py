@@ -1,7 +1,7 @@
 from tiatoolbox.tools import stainnorm
 from tiatoolbox.tools.stainextract import VahadaneExtractor
 from tiatoolbox.tools.stainnorm import get_normalizer
-from tiatoolbox.utils import imread
+from tiatoolbox.utils.misc import imread
 from PIL import Image
 import numpy as np
 

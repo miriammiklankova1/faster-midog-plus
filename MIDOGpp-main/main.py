@@ -13,7 +13,7 @@ if __name__ == '__main__':
     initialize(version_base=None, config_path="configs/")
     cfg = compose(config_name="all")
 
-    output_dir = cfg.hydra.run.dir
+    output_dir = cfg.hydra.run.dir if hasattr(cfg, 'hydra') else "/workspace/faster-midog-plus/.mnt/scratch/outputs"
     # Training
     #training(cfg) # For FastAI RetinaNet
     training_FasterRCNN(cfg) # For FasterRCNN Pytorch
