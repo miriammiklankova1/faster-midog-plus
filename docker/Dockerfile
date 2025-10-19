@@ -18,5 +18,5 @@ WORKDIR /workspace/faster-midog-plus
 # Copy and install requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir --no-deps SlideRunner==2.0
 USER root
