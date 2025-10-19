@@ -1,17 +1,20 @@
 # syntax=docker/dockerfile:1
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu20.04
 
 # Prevent interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
 # Update and install system dependencies
-RUN apt-get update --fix-missing && \
-    apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt-get update && \
+    apt-get install -y --no-install-recommends \
     python3.10 \
     python3.10-dev \
+    python3.10-distutils \
     python3-pip \
     git \
     wget \
@@ -20,7 +23,8 @@ RUN apt-get update --fix-missing && \
     libsm6 \
     libxext6 \
     libxrender-dev \
-    && update-ca-certificates \
+    openslide-tools \
+    python3-openslide \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -29,13 +33,10 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 &
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 
 # Upgrade pip
-RUN python -m pip install --upgrade pip setuptools wheel
+RUN python3.10 -m pip install --upgrade pip setuptools wheel
 
-# Install OpenSlide
-RUN apt-get update && \
-    apt-get install -y openslide-tools python3-openslide && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Set environment variables for OpenSlide
+ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 # Set working directory
 WORKDIR /workspace/faster-midog-plus
@@ -43,8 +44,5 @@ WORKDIR /workspace/faster-midog-plus
 # Copy and install requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Set environment variables for OpenSlide
-ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 USER root

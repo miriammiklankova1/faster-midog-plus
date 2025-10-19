@@ -17,8 +17,8 @@ docker run \
     --shm-size 8g \
     -v "${HOME}/.netrc":/root/.netrc \
     -v "${CWD}/..":/workspace/${PROJECT_NAME} \
-    -v "/mnt/nfs-data":/mnt/nfs-data \
     -v "/mnt/scratch/${USER}/.datasets":/mnt/datasets \
+    -v "/mnt/nfs-data":/mnt/nfs-data \
     -v "/mnt/scratch/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/scratch \
     -v "/mnt/persist/${USER}/${PROJECT_NAME}":/workspace/${PROJECT_NAME}/.mnt/persist \
     -e CUDA_VISIBLE_DEVICES="${DEVICE}" \
