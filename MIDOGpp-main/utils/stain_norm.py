@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 
 # Define the target image used (it must contains the necessary color spectrum) 
-target_image_path = "/images/009.tiff"
+target_image_path = "/mnt/datasets/MIDOGpp/images/009.tiff"
 
 # Define the extractor and get the stain_matrix
 extractor = VahadaneExtractor()

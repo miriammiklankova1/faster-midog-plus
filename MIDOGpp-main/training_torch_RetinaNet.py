@@ -285,7 +285,7 @@ def training_torch_RetinaNet(cfg: DictConfig):
     # For all tumortypes for training
     files = all_files
     test_files_names = [file.file.name for file in test_files]
-    with open('/app/MIDOGpp-main/statistics_sdata.pickle', 'rb') as handle:
+    with open('/workspace/faster-midog-plus/MIDOGpp-main/statistics_sdata.pickle', 'rb') as handle:
         statistics = pickle.load(handle)
     mean = np.array(np.mean(np.array([value for key,value in statistics['mean'].items() if tumortypes.__contains__(key)]), axis=(0,1)), dtype=np.float32)
     std = np.array(np.mean(np.array([value for key,value in statistics['std'].items() if tumortypes.__contains__(key)]), axis=(0,1)), dtype=np.float32)
@@ -296,7 +296,7 @@ def training_torch_RetinaNet(cfg: DictConfig):
     for train_index, val_index in skf.split(files, bins):
         cfg.update({'x-validation': {'train': json.dumps([files[i].file.name for i in train_index]), 'valid': json.dumps([files[i].file.name for i in val_index])}})
         # Log in on wandb with the API key
-        wandb.login(key='9d9448e5eba795368eae03d6fc625a83811a300e')
+        wandb.login(key='e7d6790cbc52f5f9ad11eb9430e0a3da91b66e9f')
         run = wandb.init(entity=cfg.wandb.entity, project=cfg.wandb.project,
                          config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True), reinit=True, name= "Kfold_RetinaNet_"+str(index_kfold))
         train_files = [files[i] for i in train_index]
@@ -412,5 +412,5 @@ def training_torch_RetinaNet(cfg: DictConfig):
         wandb.run.finish()
     
     # Create json file with the test files
-    with open(os.path.join("/app/wandb", 'test_files.json'), 'w') as test_file_json:
+    with open(os.path.join("cfg.hydra.run.dir", 'test_files.json'), 'w') as test_file_json:
         json.dump(test_files_names, test_file_json)

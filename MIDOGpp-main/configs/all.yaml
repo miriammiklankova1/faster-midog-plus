@@ -6,23 +6,23 @@ defaults:
 hydra:
   output_subdir: null
   run:
-    dir: /app/MIDOGpp-main/
+    dir: /workspace/faster-midog-plus/.mnt/scratch/outputs
 
 wandb:
-  entity: your_wandb_entity
-  project: your_wandb_project
+  entity: xmiklankova
+  project: MIDOG-fasterRCNN
 
 files:
-  image_path: /images
-  annotation_file: /app/MIDOGpp-main/databases/MIDOG++.sqlite
+  image_path: /mnt/datasets/MIDOGpp/images
+  annotation_file: /mnt/datasets/MIDOGpp/images/MIDOG++.sqlite
 
 data:
   patch_size: 512
-  batch_size: 12
+  batch_size: 4 
   level: 0
-  train_patches: 1000
-  valid_patches: 250
-  tumortypes: human breast cancer,canine lung cancer,canine lymphoma,canine cutaneous mast cell tumor,human neuroendocrine tumor,canine soft tissue sarcoma,human melanoma
+  train_patches: 100
+  valid_patches: 25
+  tumortypes: human breast cancer
 
 retinanet:
   scales: 0.2,0.4,0.6,0.8,1.0

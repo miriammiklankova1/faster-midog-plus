@@ -12,16 +12,18 @@ from training_torch_RetinaNet import training_torch_RetinaNet
 if __name__ == '__main__':
     initialize(version_base=None, config_path="configs/")
     cfg = compose(config_name="all")
+
+    output_dir = cfg.hydra.run.dir
     # Training
-    training(cfg) # For FastAI RetinaNet
-    #training_FasterRCNN(cfg) # For FasterRCNN Pytorch
+    #training(cfg) # For FastAI RetinaNet
+    training_FasterRCNN(cfg) # For FasterRCNN Pytorch
     #training_torch_RetinaNet(cfg) # For RetinaNet Pytorch
     
     # Inference
-    inference("/app/wandb")
-    #inference_FasterRCNN("/app/wandb")
+    #inference("/app/wandb")
+    inference_FasterRCNN(output_dir)
     #inference_RetinaNet("/app/wandb")
     
     # Evaluation and aggregation
-    evaluate("/app/wandb")
-    aggregate("/app/wandb")
+    evaluate(output_dir)
+    aggregate(output_dir)

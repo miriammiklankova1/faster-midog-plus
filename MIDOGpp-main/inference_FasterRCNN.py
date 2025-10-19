@@ -27,7 +27,7 @@ import time
 
 class MyMitosisDetection:
     def __init__(self, path, config, detect_threshold, nms_threshold):
-        with open('/app/MIDOGpp-main/statistics_sdata.pickle', 'rb') as handle:
+        with open('/workspace/faster-midog-plus/MIDOGpp-main/statistics_sdata.pickle', 'rb') as handle:
             statistics = pickle.load(handle)
         tumortypes = config["data"]["value"]["tumortypes"].split(",")
         self.mean = np.array(np.mean(np.array([value for key, value in statistics['mean'].items() if tumortypes.__contains__(key)]),axis=(0, 1)), dtype=np.float32)
@@ -176,7 +176,7 @@ class Mitosisdetection(DetectionAlgorithm):
         self.output_test_file = Path(os.path.join(path, "mitotic-figures-test.json"))
 
         self.database = Database()
-        self.database.open(Path("/app/MIDOGpp-main/databases/MIDOG++.sqlite"))
+        self.database.open(Path("/mnt/datasets/MIDOGpp/images/MIDOG++.sqlite"))
         self.uids = dict(self.database.execute('SELECT filename,uid from Slides').fetchall())
         self.gts = {}
 

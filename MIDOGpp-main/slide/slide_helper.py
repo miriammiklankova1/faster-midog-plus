@@ -40,7 +40,7 @@ def load_images(slide_folder, annotation_file, level, patch_size, categories, tu
 
     database = Database()
     database.open(annotation_file)
-    slides = pd.read_csv('/app/MIDOGpp-main/datasets_xvalidation.csv', delimiter=";")
+    slides = pd.read_csv('/workspace/faster-midog-plus/MIDOGpp-main/datasets_xvalidation.csv', delimiter=";")
 
     getslides = """SELECT uid, filename, width, height FROM Slides"""
     for currslide, file_name, width, height in tqdm(database.execute(getslides).fetchall()):
