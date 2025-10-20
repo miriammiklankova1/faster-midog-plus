@@ -90,10 +90,10 @@ def training(cfg: DictConfig):
         wandb.join()
     
     # Create json file with the test files
-    with open(os.path.join(cfg.hydra.run.dir, 'test_files.json'), 'w') as test_file_json:
+    output_dir = cfg.hydra.run.dir if hasattr(cfg, 'hydra') else "/workspace/faster-midog-plus/.mnt/scratch/outputs"
+    with open(os.path.join(output_dir, 'test_files.json'), 'w') as test_file_json:
         json.dump(test_files_names, test_file_json)
     
-
 
 
 
